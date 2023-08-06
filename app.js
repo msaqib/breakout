@@ -1,11 +1,16 @@
 const blockWidth = 100;
 const blockHeight = 20;
+const ballWidth = 10
+const ballHeight = 10
 const grid = document.querySelector('.grid')
 
 document.addEventListener('keydown', moveBat)
 
 const bat = new Block(280, 10, blockWidth, blockHeight)
 displayBlock(bat, 'bat')
+
+const ball = new Block(280, 50, ballWidth, ballHeight)
+displayBlock(ball, 'ball')
 
 function moveBat(event) {
     const key = event.key
@@ -15,8 +20,14 @@ function moveBat(event) {
             bat.setX(bat.bottomLeft.x - 10)
             const bElement = document.querySelector('.bat');
             bElement.style.left = bat.bottomLeft.x + 'px'
-        }
-        
+        }        
+        break
+    case 'ArrowRight':
+        if (bat.bottomLeft.x < 560) {
+            bat.setX(bat.bottomLeft.x + 10)
+            const bElement = document.querySelector('.bat');
+            bElement.style.left = bat.bottomLeft.x + 'px'
+        }        
         break;
     }
 }
