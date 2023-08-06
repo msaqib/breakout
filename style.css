@@ -11,3 +11,10 @@
     background-color: #0303AA;
     position: absolute;
 }
+
+.bat {
+    width: 100px;
+    height: 20px;
+    background-color: #AA0303;
+    position: absolute;
+}

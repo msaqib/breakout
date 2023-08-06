@@ -2,6 +2,25 @@ const blockWidth = 100;
 const blockHeight = 20;
 const grid = document.querySelector('.grid')
 
+document.addEventListener('keydown', moveBat)
+
+const bat = new Block(280, 10, blockWidth, blockHeight)
+displayBlock(bat, 'bat')
+
+function moveBat(event) {
+    const key = event.key
+    switch(key) {
+    case 'ArrowLeft':
+        if (bat.bottomLeft.x > 10) {
+            bat.setX(bat.bottomLeft.x - 10)
+            const bElement = document.querySelector('.bat');
+            bElement.style.left = bat.bottomLeft.x + 'px'
+        }
+        
+        break;
+    }
+}
+
 function Block(left, bottom, width, height) {
     this.bottomLeft = {x:left, y: bottom}
     this.bottomRight = {x:left + width, y: bottom}
@@ -9,19 +28,25 @@ function Block(left, bottom, width, height) {
     this.topRight = {x: left + width, y: bottom + height}
 }
 
-const blocks = [
-]
+Block.prototype.setX = function(x) {
+        this.bottomLeft.x = x;
+}
+
+const blocks = []
+
 createRows()
 displayBlocks()
 
 function displayBlocks() {
-    blocks.forEach( b => {
-        const block = document.createElement('div')
-        block.classList.add('block')
+    blocks.forEach( b => displayBlock(b, 'block'))
+}
+
+function displayBlock(b, style) {
+    const block = document.createElement('div')
+        block.classList.add(style)
         block.style.left = b.bottomLeft.x + 'px'
         block.style.bottom = b.bottomLeft.y + 'px'
         grid.appendChild(block)
-    })
 }
 
 function createRows() {
