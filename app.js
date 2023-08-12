@@ -28,6 +28,16 @@ const gameover = document.getElementById('gameover')
 
 let score = 0
 
+const splashScreen = document.getElementById('splashScreen');
+const countdownElement = document.getElementById('countdown');
+
+// Show the splash screen initially
+splashScreen.style.display = 'flex';
+
+// Countdown and start the game
+let countdown = 3;
+countdownElement.textContent = countdown;
+
 function moveBat(event) {
     const key = event.key
     switch(key) {
@@ -111,7 +121,7 @@ function moveBall() {
     ballElement.style.bottom = ball.bottomLeft.y + 'px'
 }
 
-const refresh = setInterval(moveBall, ballSpeed)
+let refresh
 
 function checkCollision() {
     // Did we hit the bat
@@ -183,3 +193,16 @@ function stop() {
     clearInterval(refresh)
     document.removeEventListener('keydown', moveBat)
 }
+
+const countdownInterval = setInterval(() => {
+    countdown--;
+    if (countdown === 0) {
+        countdownElement.textContent = 'GO!';
+    } else if (countdown < 0) {
+        clearInterval(countdownInterval);
+        splashScreen.style.display = 'none'; // Hide the splash screen
+        refresh = setInterval(moveBall, ballSpeed)
+    } else {
+        countdownElement.textContent = countdown;
+    }
+}, 1000);

@@ -25,3 +25,19 @@
     background-color: #03AA03;
     position: absolute;
 }
+
+.splash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+}
+
+.countdown {
+    font-size: 48px;
+    color: white;
+}
